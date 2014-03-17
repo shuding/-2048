@@ -90,6 +90,13 @@ HTMLActuator.prototype.addTile = function (tile) {
   this.tileContainer.appendChild(wrapper);
 };
 
+HTMLActuator.prototype.setNext = function (tile) {
+	document.getElementsByClassName("next-cell")[0].classList.remove("tile-"+this.prevTile);
+	document.getElementsByClassName("next-cell")[0].classList.add("tile-"+tile);
+	document.getElementsByClassName("next-cell")[0].children[0].innerText = tile;
+	this.prevTile=tile;
+}
+
 HTMLActuator.prototype.applyClasses = function (element, classes) {
   element.setAttribute("class", classes.join(" "));
 };
@@ -111,10 +118,10 @@ HTMLActuator.prototype.updateScore = function (score) {
 
   this.scoreContainer.textContent = this.score;
 
-  if (difference > 0) {
+  if (difference < 0) {
     var addition = document.createElement("div");
     addition.classList.add("score-addition");
-    addition.textContent = "+" + difference;
+    addition.textContent = difference;
 
     this.scoreContainer.appendChild(addition);
   }
@@ -126,7 +133,7 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
 
 HTMLActuator.prototype.message = function (won) {
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "I win!" : "I'm over!";
+  var message = won ? "You lose!" : "You win!";
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;

@@ -39,7 +39,7 @@ LocalScoreManager.prototype.localStorageSupported = function () {
 };
 
 LocalScoreManager.prototype.get = function () {
-  return this.storage.getItem(this.key) || 233333;
+  return this.storage.getItem(this.key) || 0;
 };
 
 LocalScoreManager.prototype.set = function (score) {

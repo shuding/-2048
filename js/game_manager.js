@@ -43,6 +43,8 @@ GameManager.prototype.setup = function () {
   this.over        = false;
   this.won         = false;
   this.keepPlaying = false;
+  
+  this.genNext();
 
   // Add the initial tiles
   // this.addStartTiles();
@@ -70,7 +72,7 @@ GameManager.prototype.addRandomTile = function () {
 
 // Sends the updated grid to the actuator
 GameManager.prototype.actuate = function () {
-  if (this.over && this.scoreManager.get() > this.score) {
+  if (this.over && this.scoreManager.get() < this.score) {
     this.scoreManager.set(this.score);
   }
 
@@ -138,7 +140,7 @@ GameManager.prototype.move = function (direction) {
           tile.updatePosition(positions.next);
 
           // Update the score
-          self.score += merged.value;
+          self.score -= merged.value;
 
           // The mighty 2048 tile
           if (merged.value === 2048) self.won = true;
@@ -168,7 +170,8 @@ GameManager.prototype.move = function (direction) {
 GameManager.prototype.drop = function (pos) {
   if (this.isGameTerminated()) return; // Don't do anything if the game's over
   if (this.grid.cellsAvailable()) {
-    var value = Math.random() < 0.9 ? 2 : 4;
+    var value = this.nextTile;
+	this.genNext();
     if (pos == "random") {
       var cell = this.grid.randomAvailableCell();
     } else {
@@ -180,23 +183,20 @@ GameManager.prototype.drop = function (pos) {
       this.grid.insertTile(tile);
 
       this.actuate();
-      while (
-        this.movesAvailable()
-        &&
-        !this.move(new AI(this.grid,true).getBest().move)
-        &&
-        !this.isGameTerminated()
-      ) {};
+      if (this.movesAvailable()) {
+		this.move(new AI(this.grid,true).getBest().move);
+	  }
+	  else {
+		this.over = true; // Game over!
+		this.actuate();
+	  }
     }
   }
+}
 
-  while (
-    !this.grid.cellsAvailable()
-    &&
-    !this.isGameTerminated()
-    &&
-    this.move(new AI(this.grid,true).getBest().move)
-  ) {}
+GameManager.prototype.genNext = function() {
+	this.nextTile=Math.random() < 0.9 ? 2 : 4;
+	this.actuator.setNext(this.nextTile);
 }
 
 // Get the vector representing the chosen direction
