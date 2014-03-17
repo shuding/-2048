@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>~2048</title>
+
+  <link href="style/main.css" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
+</head>
+<body>
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">~2048</h1>
+      <div class="scores-container">
+        <div class="score-container">0</div>
+        <div class="best-container">233333</div>
+      </div>
+    </div>
+    <p class="game-intro"><span class="intro-container">Put the tiles and make the game over!</span></p>
+
+    <div class="game-container">
+      <div class="game-message">
+        <p></p>
+        <div class="lower">
+	        <a class="keep-playing-button">No!</a>
+          <a class="retry-button">Play again</a>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid-row">
+          <div class="grid-cell gc00"></div>
+          <div class="grid-cell gc10"></div>
+          <div class="grid-cell gc20"></div>
+          <div class="grid-cell gc30"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell gc01"></div>
+          <div class="grid-cell gc11"></div>
+          <div class="grid-cell gc21"></div>
+          <div class="grid-cell gc31"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell gc02"></div>
+          <div class="grid-cell gc12"></div>
+          <div class="grid-cell gc22"></div>
+          <div class="grid-cell gc32"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell gc03"></div>
+          <div class="grid-cell gc13"></div>
+          <div class="grid-cell gc23"></div>
+          <div class="grid-cell gc33"></div>
+        </div>
+      </div>
+
+      <div class="tile-container">
+
+      </div>
+    </div>
+
+    <p class="game-explanation">
+      <strong class="important">How to play:</strong> Use your <strong>mouse</strong> to put the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+    </p>
+    <hr>
+    <p>
+    Forked by <a href="http://github.com/hczhcz" target="_blank">hcz.</a> Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
+    </p>
+  </div>
+
+  <script src="js/animframe_polyfill.js"></script>
+  <script src="js/keyboard_input_manager.js"></script>
+  <script src="js/html_actuator.js"></script>
+  <script src="js/grid.js"></script>
+  <script src="js/tile.js"></script>
+  <script src="js/local_score_manager.js"></script>
+  <script src="js/game_manager.js"></script>
+  <script src="js/application.js"></script>
+  <script src="js/ai.js"></script>
+</body>
+</html>
